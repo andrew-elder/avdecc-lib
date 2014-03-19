@@ -267,7 +267,13 @@ namespace avdecc_lib
                     bool found_adp_in_end_station = false;
 
                     jdksavdecc_adpdu adpdu;
-                    jdksavdecc_adpdu_read(&adpdu, frame, ETHER_HDR_SIZE, frame_len );
+                    ssize_t ret = jdksavdecc_adpdu_read(&adpdu, frame, ETHER_HDR_SIZE, frame_len);
+                    if (ret < 0)
+                    {
+                        log_imp_ref->post_log_msg(LOGGING_LEVEL_ERROR, "jdksavdecc_adpdu_read() read failure");
+                        break;
+                    }
+                        
 
                     status = AVDECC_LIB_STATUS_INVALID;
                     is_notification_id_valid = false;
