@@ -42,7 +42,7 @@ namespace avdecc_lib
     }
 
     audio_cluster_descriptor_imp::~audio_cluster_descriptor_imp() {}
-    
+
     audio_cluster_descriptor_response * STDCALL audio_cluster_descriptor_imp::get_audio_cluster_response()
     {
         std::lock_guard<std::mutex> guard(base_end_station_imp_ref->locker); //mutex lock end station

@@ -48,7 +48,6 @@ namespace avdecc_lib
         buffer = (uint8_t *)malloc(frame_size * sizeof(uint8_t));
         memcpy(buffer, frame, frame_size);
         position = pos;
-
         stream_flags_init();
     }
     
@@ -143,7 +142,6 @@ namespace avdecc_lib
         uint64_t current_format;
         current_format = jdksavdecc_uint64_get(&buffer[position +
                                             JDKSAVDECC_DESCRIPTOR_STREAM_OFFSET_CURRENT_FORMAT], 0);
-
         return utility::ieee1722_format_value_to_name(current_format);
     }
     

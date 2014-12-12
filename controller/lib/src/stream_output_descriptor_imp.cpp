@@ -58,28 +58,28 @@ namespace avdecc_lib
         return resp = new stream_output_descriptor_response_imp(resp_ref->get_buffer(),
                                                                resp_ref->get_size(), resp_ref->get_pos());
     }
-    
+
     stream_output_get_stream_format_response * STDCALL stream_output_descriptor_imp::get_stream_output_get_stream_format_response()
     {
         std::lock_guard<std::mutex> guard(base_end_station_imp_ref->locker); //mutex lock end station
         return get_format_resp  = new stream_output_get_stream_format_response_imp(resp_ref->get_buffer(),
                                                                                   resp_ref->get_size(), resp_ref->get_pos());
     }
-    
+
     stream_output_get_stream_info_response * STDCALL stream_output_descriptor_imp::get_stream_output_get_stream_info_response()
     {
         std::lock_guard<std::mutex> guard(base_end_station_imp_ref->locker); //mutex lock end station
         return get_info_resp  = new stream_output_get_stream_info_response_imp(resp_ref->get_buffer(),
                                                                                    resp_ref->get_size(), resp_ref->get_pos());
     }
-    
+
     stream_output_get_tx_state_response * STDCALL stream_output_descriptor_imp::get_stream_output_get_tx_state_response()
     {
         std::lock_guard<std::mutex> guard(base_end_station_imp_ref->locker); //mutex lock end station
         return get_tx_state_resp  = new stream_output_get_tx_state_response_imp(resp_ref->get_buffer(),
                                                                                resp_ref->get_size(), resp_ref->get_pos());
     }
-    
+
     stream_output_get_tx_connection_response * STDCALL stream_output_descriptor_imp::get_stream_output_get_tx_connection_response()
     {
         std::lock_guard<std::mutex> guard(base_end_station_imp_ref->locker); //mutex lock end station
@@ -582,7 +582,7 @@ namespace avdecc_lib
 
         acmp_controller_state_machine_ref->common_hdr_init(JDKSAVDECC_ACMP_MESSAGE_TYPE_GET_TX_STATE_COMMAND, &cmd_frame);
         system_queue_tx(notification_id, CMD_WITH_NOTIFICATION, cmd_frame.payload, cmd_frame.length);
-        
+
         free(entity_resp_ref);
         return 0;
     }
@@ -651,7 +651,7 @@ namespace avdecc_lib
 
         acmp_controller_state_machine_ref->common_hdr_init(JDKSAVDECC_ACMP_MESSAGE_TYPE_GET_TX_CONNECTION_COMMAND, &cmd_frame);
         system_queue_tx(notification_id, CMD_WITH_NOTIFICATION, cmd_frame.payload, cmd_frame.length);
-        
+
         free(entity_resp_ref);
         return 0;
     }

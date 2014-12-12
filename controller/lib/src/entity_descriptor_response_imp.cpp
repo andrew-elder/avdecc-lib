@@ -107,9 +107,7 @@ namespace avdecc_lib
         
         utility::convert_eui48_to_uint64(&buffer[position +
                                                  JDKSAVDECC_DESCRIPTOR_ENTITY_OFFSET_ASSOCIATION_ID], association_id);
-        
         return association_id;
-
     }
     
     uint8_t * STDCALL entity_descriptor_response_imp::entity_name()

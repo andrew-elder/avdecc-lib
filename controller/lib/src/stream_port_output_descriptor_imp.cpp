@@ -40,23 +40,22 @@ namespace avdecc_lib
         m_type = jdksavdecc_descriptor_stream_port_get_descriptor_type(resp_ref->get_buffer(), resp_ref->get_pos());
         m_index = jdksavdecc_descriptor_stream_port_get_descriptor_index(resp_ref->get_buffer(), resp_ref->get_pos());
     }
-    
+
     stream_port_output_descriptor_imp::~stream_port_output_descriptor_imp() {}
-    
-    
+
     stream_port_output_descriptor_response * STDCALL stream_port_output_descriptor_imp::get_stream_port_output_response()
     {
         std::lock_guard<std::mutex> guard(base_end_station_imp_ref->locker); //mutex lock end station
         return resp = new stream_port_output_descriptor_response_imp(resp_ref->get_buffer(),
                                                                     resp_ref->get_size(), resp_ref->get_pos());
     }
-    
+
     uint16_t STDCALL stream_port_output_descriptor_imp::descriptor_type() const
     {
         assert(m_type == JDKSAVDECC_DESCRIPTOR_STREAM_PORT_OUTPUT);
         return m_type;
     }
-    
+
     uint16_t STDCALL stream_port_output_descriptor_imp::descriptor_index() const
     {
         return m_index;

@@ -69,7 +69,6 @@ namespace avdecc_lib
         
         utility::convert_eui48_to_uint64(&buffer[position +
                                                  JDKSAVDECC_DESCRIPTOR_CLOCK_SOURCE_OFFSET_CLOCK_SOURCE_IDENTIFIER], clock_source_identifier);
-        
         return clock_source_identifier;
     }
     

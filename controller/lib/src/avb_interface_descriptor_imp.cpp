@@ -90,7 +90,6 @@ namespace avdecc_lib
         /******************************* Fill frame payload with AECP data and send the frame **************************/
         aecp_controller_state_machine_ref->ether_frame_init(base_end_station_imp_ref->mac(), &cmd_frame,
                                                             ETHER_HDR_SIZE + JDKSAVDECC_AEM_COMMAND_GET_COUNTERS_COMMAND_LEN);
-        
         aem_cmd_get_counters_returned = jdksavdecc_aem_command_get_counters_write(&aem_cmd_get_counters,
                                                                                          cmd_frame.payload,
                                                                                          ETHER_HDR_SIZE,

@@ -43,8 +43,7 @@ namespace avdecc_lib
     }
     
     stream_input_get_rx_state_response_imp::~stream_input_get_rx_state_response_imp(){}
-    
-    
+
     uint64_t STDCALL stream_input_get_rx_state_response_imp::get_rx_state_stream_id()
     {
         jdksavdecc_eui64 stream_id;

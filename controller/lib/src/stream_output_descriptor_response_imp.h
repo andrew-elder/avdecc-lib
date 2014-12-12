@@ -43,7 +43,6 @@ namespace avdecc_lib
     {
     private:
         std::map <string, int> stream_info_flags;
-        
         struct stream_output_desc_stream_flags
         {
             bool clock_sync_source;

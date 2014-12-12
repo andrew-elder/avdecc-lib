@@ -40,7 +40,14 @@ namespace avdecc_lib
     class locale_descriptor_response : public virtual descriptor_base
     {
     public:
-
+        /**
+        * The identifier is a UTF-8 string that contains one to three components such as a
+        * language code, a region code, or a variant code, separated by the dash character.
+        * Examples of valid locale identifiers are en-US for English in the US, en-AU for
+        * English in Australia, haw-US for Hawaiian in the US, and fr-CA for French in Canada.
+        *
+        * \return The identifier of the LOCALE.
+        */
         AVDECC_CONTROLLER_LIB32_API virtual uint8_t * STDCALL locale_identifier() = 0;
         
         /**

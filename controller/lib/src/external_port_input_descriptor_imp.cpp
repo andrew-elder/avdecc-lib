@@ -43,7 +43,7 @@ namespace avdecc_lib
     }
 
     external_port_input_descriptor_imp::~external_port_input_descriptor_imp() {}
-    
+
     external_port_input_descriptor_response * STDCALL external_port_input_descriptor_imp::get_external_port_input_response()
     {
         std::lock_guard<std::mutex> guard(base_end_station_imp_ref->locker); //mutex lock end station

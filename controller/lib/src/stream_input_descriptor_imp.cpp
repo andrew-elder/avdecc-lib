@@ -55,28 +55,28 @@ namespace avdecc_lib
         return resp = new stream_input_descriptor_response_imp(resp_ref->get_buffer(),
                                                                resp_ref->get_size(), resp_ref->get_pos());
     }
-    
+
     stream_input_counters_response * STDCALL stream_input_descriptor_imp::get_stream_input_counters_response()
     {
         std::lock_guard<std::mutex> guard(base_end_station_imp_ref->locker); //mutex lock end station
         return counters_resp = new stream_input_counters_response_imp(resp_ref->get_buffer(),
                                                                       resp_ref->get_size(), resp_ref->get_pos());
     }
-    
+
     stream_input_get_stream_format_response * STDCALL stream_input_descriptor_imp::get_stream_input_get_stream_format_response()
     {
         std::lock_guard<std::mutex> guard(base_end_station_imp_ref->locker); //mutex lock end station
         return get_format_resp  = new stream_input_get_stream_format_response_imp(resp_ref->get_buffer(),
                                                                                   resp_ref->get_size(), resp_ref->get_pos());
     }
-    
+
     stream_input_get_stream_info_response * STDCALL stream_input_descriptor_imp::get_stream_input_get_stream_info_response()
     {
         std::lock_guard<std::mutex> guard(base_end_station_imp_ref->locker); //mutex lock end station
         return get_info_resp  = new stream_input_get_stream_info_response_imp(resp_ref->get_buffer(),
                                                                                   resp_ref->get_size(), resp_ref->get_pos());
     }
-    
+
     stream_input_get_rx_state_response * STDCALL stream_input_descriptor_imp::get_stream_input_get_rx_state_response()
     {
         std::lock_guard<std::mutex> guard(base_end_station_imp_ref->locker); //mutex lock end station
@@ -94,7 +94,7 @@ namespace avdecc_lib
     {
         return m_index;
     }
-    
+
     uint64_t STDCALL stream_input_descriptor_imp::set_stream_format_stream_format()
     {
         return jdksavdecc_uint64_get(&aem_cmd_set_stream_format_resp.stream_format, 0);
@@ -510,7 +510,7 @@ namespace avdecc_lib
 
         acmp_controller_state_machine_ref->common_hdr_init(JDKSAVDECC_ACMP_MESSAGE_TYPE_CONNECT_RX_COMMAND, &cmd_frame);
         system_queue_tx(notification_id, CMD_WITH_NOTIFICATION, cmd_frame.payload, cmd_frame.length);
-        
+
         free(entity_resp_ref);
         return 0;
     }

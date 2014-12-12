@@ -42,7 +42,7 @@ namespace avdecc_lib
     }
 
     strings_descriptor_imp::~strings_descriptor_imp() {}
-    
+
     strings_descriptor_response * STDCALL strings_descriptor_imp::get_strings_response()
     {
         std::lock_guard<std::mutex> guard(base_end_station_imp_ref->locker); //mutex lock end station

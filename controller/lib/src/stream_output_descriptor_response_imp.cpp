@@ -48,7 +48,6 @@ namespace avdecc_lib
         buffer = (uint8_t *)malloc(frame_size * sizeof(uint8_t));
         memcpy(buffer, frame, frame_size);
         position = pos;
-
         stream_flags_init();
         
         stream_info_flags["CLASS_B"]                  = JDKSAVDECC_AEM_COMMAND_SET_STREAM_INFO_FLAG_CLASS_B;
@@ -63,7 +62,6 @@ namespace avdecc_lib
         stream_info_flags["MSRP_ACC_LAT_VALID"]       = JDKSAVDECC_AEM_COMMAND_SET_STREAM_INFO_FLAG_MSRP_ACC_LAT_VALID;
         stream_info_flags["STREAM_ID_VALID"]          = JDKSAVDECC_AEM_COMMAND_SET_STREAM_INFO_FLAG_STREAM_ID_VALID;
         stream_info_flags["STREAM_FORMAT_VALID"]      = JDKSAVDECC_AEM_COMMAND_SET_STREAM_INFO_FLAG_STREAM_FORMAT_VALID;
-        
     }
     
     stream_output_descriptor_response_imp::~stream_output_descriptor_response_imp() {}
@@ -81,6 +79,7 @@ namespace avdecc_lib
         stream_output_flags.tertiary_backup_supported = stream_flags() >> 8 & 0x01;
         stream_output_flags.tertiary_backup_valid = stream_flags() >> 9 & 0x01;
     }
+
     uint8_t * STDCALL stream_output_descriptor_response_imp::object_name()
     {
         return (uint8_t *)&buffer[position + JDKSAVDECC_DESCRIPTOR_STREAM_OFFSET_OBJECT_NAME];
@@ -188,7 +187,8 @@ namespace avdecc_lib
     {
         uint64_t backup_talker_entity_id_1;
         return backup_talker_entity_id_1 = jdksavdecc_uint64_get(&buffer[position +
-                                                                         JDKSAVDECC_DESCRIPTOR_STREAM_OFFSET_BACKUP_TALKER_ENTITY_ID_1], 0);    }
+                                                                         JDKSAVDECC_DESCRIPTOR_STREAM_OFFSET_BACKUP_TALKER_ENTITY_ID_1], 0);
+    }
     
     uint16_t STDCALL stream_output_descriptor_response_imp::backup_talker_unique_1()
     {
@@ -199,7 +199,8 @@ namespace avdecc_lib
     {
         uint64_t backup_talker_entity_id_2;
         return backup_talker_entity_id_2 = jdksavdecc_uint64_get(&buffer[position +
-                                                                         JDKSAVDECC_DESCRIPTOR_STREAM_OFFSET_BACKUP_TALKER_ENTITY_ID_2], 0);    }
+                                                                         JDKSAVDECC_DESCRIPTOR_STREAM_OFFSET_BACKUP_TALKER_ENTITY_ID_2], 0);
+    }
     
     uint16_t STDCALL stream_output_descriptor_response_imp::backup_talker_unique_2()
     {
@@ -231,7 +232,6 @@ namespace avdecc_lib
     bool stream_output_descriptor_response_imp::get_stream_info_flag(const char *flag)
     {
         std::map<string, int>::iterator it;
-        
         it = stream_info_flags.find(flag);
         assert(it != stream_info_flags.end());
         return it->second;

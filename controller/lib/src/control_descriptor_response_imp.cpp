@@ -79,7 +79,6 @@ namespace avdecc_lib
         
         utility::convert_eui48_to_uint64(&buffer[position +
                                                  JDKSAVDECC_DESCRIPTOR_CONTROL_OFFSET_CONTROL_TYPE], control_type);
-        
         return control_type;
     }
     

@@ -38,7 +38,6 @@ namespace avdecc_lib
         buffer = (uint8_t *)malloc(frame_size * sizeof(uint8_t));
         memcpy(buffer, frame, frame_size);
         position = pos;
-
         store_clock_sources(frame, pos);
     }
     

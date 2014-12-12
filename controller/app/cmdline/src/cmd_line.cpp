@@ -1376,7 +1376,6 @@ int cmd_line::cmd_view_details(int total_matched, std::vector<cli_argument*> arg
     
     if (get_current_entity_and_descriptor(end_station, &entity, &configuration))
         return 0;
-    
     avdecc_lib::entity_descriptor_response *entity_resp_ref = entity->get_entity_response();
 
     atomic_cout << "\nEnd Station: " << " (" << entity_resp_ref->entity_name() << ")" << std::endl;
@@ -1618,7 +1617,7 @@ int cmd_line::do_view_descriptor(std::string desc_name, uint16_t desc_index)
     avdecc_lib::entity_descriptor *entity;
     avdecc_lib::configuration_descriptor *configuration;
     get_current_entity_and_descriptor(end_station, &entity, &configuration);
-    
+
     // test field output
     if (desc_type_value == avdecc_lib::AEM_DESC_EXTERNAL_PORT_INPUT)
     {
@@ -2132,7 +2131,7 @@ int cmd_line::do_view_descriptor(std::string desc_name, uint16_t desc_index)
                 }
             }
             break;
-            
+
         case avdecc_lib::AEM_DESC_EXTERNAL_PORT_INPUT:
             {
                 if (!configuration)
@@ -2454,7 +2453,7 @@ int cmd_line::cmd_connect_rx(int total_matched, std::vector<cli_argument*> args)
         free(entity_resp_ref);
         instream->send_connect_rx_cmd((void *)cmd_notification_id, talker_entity_id, outstream_desc_index, connection_flags);
         sys->get_last_resp_status();
-        
+
         free(stream_input_resp_ref);
     }
     else
@@ -2582,7 +2581,7 @@ int cmd_line::cmd_show_connections(int total_matched, std::vector<cli_argument*>
                                 << "[" << in_stream_index << "] -> "
                                 << "0x" << std::setw(16) << std::hex << std::setfill('0') << in_end_station->entity_id()
                                 << "[" << out_stream_index << "]" << std::endl;
-                    
+
                     free(stream_input_resp_ref);
                     free(stream_output_resp_ref);
                 }
@@ -3392,6 +3391,13 @@ int cmd_line::cmd_set_clock_source(int total_matched, std::vector<cli_argument*>
         return 0;
 
     clk_domain_desc_ref->send_set_clock_source_cmd((void *)cmd_notification_id, new_clk_src_index);
+    int status = sys->get_last_resp_status();
+
+    if(status == avdecc_lib::AEM_STATUS_SUCCESS)
+    {   /*
+        atomic_cout << "Clock source index : " << std::dec << clk_domain_desc_ref->set_clock_source_clock_source_index() << std::endl;
+        */
+    }
 
     return 0;
 }

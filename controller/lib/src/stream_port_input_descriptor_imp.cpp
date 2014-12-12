@@ -42,8 +42,7 @@ namespace avdecc_lib
     }
 
     stream_port_input_descriptor_imp::~stream_port_input_descriptor_imp() {}
-    
-    
+
     stream_port_input_descriptor_response * STDCALL stream_port_input_descriptor_imp::get_stream_port_input_response()
     {
         std::lock_guard<std::mutex> guard(base_end_station_imp_ref->locker); //mutex lock end station

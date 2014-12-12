@@ -42,7 +42,7 @@ namespace avdecc_lib
     }
 
     jack_input_descriptor_imp::~jack_input_descriptor_imp() {}
-    
+
     jack_input_descriptor_response * STDCALL jack_input_descriptor_imp::get_jack_input_response()
     {
         std::lock_guard<std::mutex> guard(base_end_station_imp_ref->locker); //mutex lock end station
