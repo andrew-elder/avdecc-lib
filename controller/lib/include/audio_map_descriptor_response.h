@@ -36,7 +36,6 @@
 
 #include <stdint.h>
 #include "build.h"
-#include "descriptor_base.h"
 
 namespace avdecc_lib
 {
@@ -47,9 +46,10 @@ namespace avdecc_lib
         uint16_t cluster_channel;
     };
     
-    class audio_map_descriptor_response : public virtual descriptor_base
+    class audio_map_descriptor_response
     {
     public:
+        virtual ~audio_map_descriptor_response(){};
         /**
          * \return The number of channel mappings within the Audio Map. The maximum value
          *	       of this field is 62 for this version of AEM.

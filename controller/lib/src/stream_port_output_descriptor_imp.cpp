@@ -47,7 +47,7 @@ namespace avdecc_lib
     {
         std::lock_guard<std::mutex> guard(base_end_station_imp_ref->locker); //mutex lock end station
         return resp = new stream_port_output_descriptor_response_imp(resp_ref->get_buffer(),
-                                                                    resp_ref->get_size(), resp_ref->get_pos());
+                                                                     resp_ref->get_size(), resp_ref->get_pos());
     }
 
     uint16_t STDCALL stream_port_output_descriptor_imp::descriptor_type() const

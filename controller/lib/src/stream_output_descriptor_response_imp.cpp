@@ -41,7 +41,7 @@
 
 namespace avdecc_lib
 {
-    stream_output_descriptor_response_imp::stream_output_descriptor_response_imp(const uint8_t *frame, size_t frame_len, ssize_t pos) : descriptor_base_imp(nullptr, frame, frame_len, pos)
+    stream_output_descriptor_response_imp::stream_output_descriptor_response_imp(const uint8_t *frame, size_t frame_len, ssize_t pos)
     {
         memset(&stream_output_flags, 0, sizeof(struct stream_output_desc_stream_flags));
         frame_size = frame_len;
@@ -64,7 +64,10 @@ namespace avdecc_lib
         stream_info_flags["STREAM_FORMAT_VALID"]      = JDKSAVDECC_AEM_COMMAND_SET_STREAM_INFO_FLAG_STREAM_FORMAT_VALID;
     }
     
-    stream_output_descriptor_response_imp::~stream_output_descriptor_response_imp() {}
+    stream_output_descriptor_response_imp::~stream_output_descriptor_response_imp()
+    {
+        free(buffer);
+    }
     
     void stream_output_descriptor_response_imp::stream_flags_init()
     {

@@ -37,6 +37,7 @@ namespace avdecc_lib
     class stream_input_get_rx_state_response
     {
     public:
+        virtual ~stream_input_get_rx_state_response(){};
         /**
          * \return The stream id field used to identify and transfer the associated stream ID where suitable
          *         after sending a GET_RX_STATE command and receiving a response back for the command.
