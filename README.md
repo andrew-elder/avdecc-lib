@@ -1,3 +1,8 @@
+
+Build status
+
+[![Build Status](https://travis-ci.org/andrew-elder/avdecc-lib.svg?branch=staging)](https://travis-ci.org/andrew-elder/avdecc-lib)
+
 avdecc-lib
 ==========
 
@@ -375,3 +380,4 @@ Release Notes
 =============
 
 None so far.
+
