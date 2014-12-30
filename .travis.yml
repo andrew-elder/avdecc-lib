@@ -17,3 +17,19 @@ before_install:
 env: BUILD_KERNEL=3.13.0-36-generic
 install:
 script: ./travis.sh
+
+env:
+  global:
+   # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
+   #   via the "travis encrypt" command using the project repo's public key
+   - secure: "XBo95Nca+McyUs5xJfsLD6xiYfP4cVsEkKvyXfgHAd42+k26132WMl/lzdfDYcFIFMqjwUXRqfPruAMP8MSk3yj/71QoFcPrYqJZ+++YMOTJwy043t8WEXBI5Ue+A0kLNX5ohDiK6lMLffRGYKtDB2OTjnFqzbTeQVAd7f0SiYc="
+
+addons:
+  coverity_scan:
+    project:
+      name: "andrew-elder/avdecc-lib"
+      description: "Build submitted via Travis CI"
+    notification_email: aelder@audioscience.com
+    build_command_prepend: "cd build"
+    build_command:   "make"
+    branch_pattern: coverity_scan
