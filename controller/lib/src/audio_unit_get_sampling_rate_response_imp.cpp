@@ -42,10 +42,16 @@ namespace avdecc_lib
         memcpy(m_frame, frame, m_size);
     }
     
-    audio_unit_get_sampling_rate_response_imp::~audio_unit_get_sampling_rate_response_imp(){}
+    audio_unit_get_sampling_rate_response_imp::~audio_unit_get_sampling_rate_response_imp()
+    {
+        free(m_frame);
+    }
     
     uint32_t STDCALL audio_unit_get_sampling_rate_response_imp::get_sampling_rate_sampling_rate()
     {
-        return jdksavdecc_aem_command_get_sampling_rate_response_get_sampling_rate(m_frame, m_position);
+        uint32_t sampling_rate;
+        sampling_rate = jdksavdecc_aem_command_get_sampling_rate_response_get_sampling_rate(m_frame, m_position);
+        
+        return sampling_rate;
     }
 }

@@ -42,7 +42,10 @@ namespace avdecc_lib
         memcpy(m_frame, frame, m_size);
     }
     
-    stream_output_get_stream_format_response_imp::~stream_output_get_stream_format_response_imp(){}
+    stream_output_get_stream_format_response_imp::~stream_output_get_stream_format_response_imp()
+    {
+        free(m_frame);
+    }
     
     uint64_t STDCALL stream_output_get_stream_format_response_imp::get_stream_format()
     {

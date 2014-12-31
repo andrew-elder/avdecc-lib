@@ -583,7 +583,7 @@ namespace avdecc_lib
         acmp_controller_state_machine_ref->common_hdr_init(JDKSAVDECC_ACMP_MESSAGE_TYPE_GET_TX_STATE_COMMAND, &cmd_frame);
         system_queue_tx(notification_id, CMD_WITH_NOTIFICATION, cmd_frame.payload, cmd_frame.length);
 
-        free(entity_resp_ref);
+        delete entity_resp_ref;
         return 0;
     }
 
@@ -652,7 +652,7 @@ namespace avdecc_lib
         acmp_controller_state_machine_ref->common_hdr_init(JDKSAVDECC_ACMP_MESSAGE_TYPE_GET_TX_CONNECTION_COMMAND, &cmd_frame);
         system_queue_tx(notification_id, CMD_WITH_NOTIFICATION, cmd_frame.payload, cmd_frame.length);
 
-        free(entity_resp_ref);
+        delete entity_resp_ref;
         return 0;
     }
 

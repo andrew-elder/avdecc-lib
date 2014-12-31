@@ -3460,8 +3460,8 @@ int cmd_line::cmd_get_clock_source(int total_matched, std::vector<cli_argument*>
         atomic_cout << "Clock source index : " << std::dec << clk_domain_desc_resp->get_clock_source_by_index(clk_src_index) << std::endl;
     }
 
-    delete(clk_domain_desc_resp);
-    delete(clk_domain_stream_resp_ref);
+    delete clk_domain_desc_resp;
+    delete clk_domain_stream_resp_ref;
     return 0;
 }
 
