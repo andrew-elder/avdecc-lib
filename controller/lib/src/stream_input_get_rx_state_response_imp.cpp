@@ -24,7 +24,7 @@
 /**
  * stream_input_get_rx_state_response_imp.cpp
  *
- * STREAM INPUT get stream format response implementation
+ * STREAM INPUT get rx state response implementation
  */
 
 #include "enumeration.h"

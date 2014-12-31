@@ -24,7 +24,7 @@
 /**
  * stream_output_get_stream_format_response_imp.cpp
  *
- * STREAM output counters response implementation
+ * STREAM OUTPUT get stream format response implementation
  */
 
 #include "enumeration.h"

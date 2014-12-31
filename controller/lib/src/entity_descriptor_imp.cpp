@@ -73,7 +73,7 @@ namespace avdecc_lib
     {
         std::lock_guard<std::mutex> guard(base_end_station_imp_ref->locker); //mutex lock end station
         return resp = new entity_descriptor_response_imp(resp_ref->get_buffer(),
-                                                                resp_ref->get_size(), resp_ref->get_pos());
+                                                         resp_ref->get_size(), resp_ref->get_pos());
     }
 
     void entity_descriptor_imp::store_config_desc(end_station_imp *end_station_obj, const uint8_t *frame, ssize_t pos, size_t frame_len)

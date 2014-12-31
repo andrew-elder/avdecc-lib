@@ -24,7 +24,7 @@
 /**
  * strings_descriptor_response_imp.h
  *
- * STREAM OUTPUT descriptor response implementation class
+ * STRINGS descriptor response implementation class
  */
 
 #pragma once

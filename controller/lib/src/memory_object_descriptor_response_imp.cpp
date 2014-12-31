@@ -22,9 +22,9 @@
  */
 
 /**
- * memory_object_descriptor_response_imp::.cpp
+ * memory_object_descriptor_response_imp.cpp
  *
- * MEMORY OBJECT descriptor implementation
+ * MEMORY OBJECT descriptor response implementation
  */
 
 #include "avdecc_error.h"

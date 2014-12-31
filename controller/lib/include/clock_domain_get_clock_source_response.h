@@ -24,7 +24,7 @@
 /**
  * clock_domain_get_clock_source_response.h
  *
- * CLOCK DOMAIN stream format response base class
+ * CLOCK DOMAIN get clock source response base class
  */
 
 #pragma once

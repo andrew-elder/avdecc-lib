@@ -151,13 +151,6 @@ namespace avdecc_lib
         u_field = aem_cmd_set_clk_src_resp.aem_header.command_type >> 15 & 0x01; // u_field = the msb of the uint16_t command_type
 
         aecp_controller_state_machine_ref->update_inflight_for_rcvd_resp(notification_id, msg_type, u_field, &cmd_frame);
-        
-        /*
-        if(status == AEM_STATUS_SUCCESS)
-        {
-            update_clock_source_index(aem_cmd_set_clk_src_resp.clock_source_index);
-        }
-        */
 
         return 0;
     }

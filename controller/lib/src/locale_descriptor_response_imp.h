@@ -24,7 +24,7 @@
 /**
  * locale_descriptor_response_imp.h
  *
- * LOCALE descriptor implementation class
+ * LOCALE descriptor response implementation class
  */
 
 #pragma once

@@ -22,9 +22,9 @@
  */
 
 /**
- * stream_input_descriptor_imp.cpp
+ * stream_input_descriptor_response_imp.cpp
  *
- * STREAM INPUT descriptor implementation
+ * STREAM INPUT descriptor response implementation
  */
 
 #include <vector>

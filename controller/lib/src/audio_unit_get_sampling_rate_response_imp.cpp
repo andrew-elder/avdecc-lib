@@ -24,7 +24,7 @@
 /**
  * audio_unit_get_sampling_rate_response_imp.cpp
  *
- * Audio Unit get clock source response implementation
+ * Audio Unit get sampling rate response implementation
  */
 
 #include "enumeration.h"

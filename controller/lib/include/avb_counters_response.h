@@ -24,7 +24,7 @@
 /**
  * avb_counters_response.h
  *
- * AVB counters response base class
+ * AVB INTERFACE counters response base class
  */
 
 #pragma once
