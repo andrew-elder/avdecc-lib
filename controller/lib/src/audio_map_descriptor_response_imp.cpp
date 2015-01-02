@@ -68,7 +68,7 @@ namespace avdecc_lib
         return jdksavdecc_descriptor_audio_map_get_number_of_mappings(buffer, position);
     }
     
-    int STDCALL audio_map_descriptor_response_imp::mapping(size_t index, struct audio_map_mapping &map)
+    int const STDCALL audio_map_descriptor_response_imp::mapping(size_t index, struct audio_map_mapping &map)
     {
         if (index >= number_of_mappings())
             return -1;

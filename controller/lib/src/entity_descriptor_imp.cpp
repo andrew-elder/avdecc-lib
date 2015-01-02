@@ -38,11 +38,7 @@
 
 namespace avdecc_lib
 {
-    entity_descriptor_imp::entity_descriptor_imp(end_station_imp *end_station_obj, const uint8_t *frame, ssize_t pos, size_t frame_len) : descriptor_base_imp(end_station_obj, frame, frame_len, pos)
-    {
-        m_type = jdksavdecc_descriptor_entity_get_descriptor_type(resp_ref->get_buffer(), resp_ref->get_pos());
-        m_index = jdksavdecc_descriptor_entity_get_descriptor_index(resp_ref->get_buffer(), resp_ref->get_pos());
-    }
+    entity_descriptor_imp::entity_descriptor_imp(end_station_imp *end_station_obj, const uint8_t *frame, ssize_t pos, size_t frame_len) : descriptor_base_imp(end_station_obj, frame, frame_len, pos) {}
 
     entity_descriptor_imp::~entity_descriptor_imp()
     {
@@ -54,14 +50,14 @@ namespace avdecc_lib
 
     uint16_t STDCALL entity_descriptor_imp::descriptor_type() const
     {
-        assert(m_type == JDKSAVDECC_DESCRIPTOR_ENTITY);
-        return m_type;
+        assert(jdksavdecc_descriptor_entity_get_descriptor_type(resp_ref->get_buffer(), resp_ref->get_pos()) == JDKSAVDECC_DESCRIPTOR_ENTITY);
+        return jdksavdecc_descriptor_entity_get_descriptor_type(resp_ref->get_buffer(), resp_ref->get_pos());
     }
 
     uint16_t STDCALL entity_descriptor_imp::descriptor_index() const
     {
-        assert(m_index == 0);
-        return m_index;
+        assert(jdksavdecc_descriptor_entity_get_descriptor_index(resp_ref->get_buffer(), resp_ref->get_pos()) == 0);
+        return jdksavdecc_descriptor_entity_get_descriptor_index(resp_ref->get_buffer(), resp_ref->get_pos());
     }
     
     uint16_t STDCALL entity_descriptor_imp::current_configuration()

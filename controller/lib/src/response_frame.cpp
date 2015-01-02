@@ -65,8 +65,6 @@ namespace avdecc_lib {
             {
                 buffer = replaced_buffer;
                 memcpy(buffer, frame, size);
-                position = pos;
-                frame_size = size;
             }
             else
             {
@@ -75,6 +73,9 @@ namespace avdecc_lib {
                 return -1;
             }
         }
+        position = pos;
+        frame_size = size;
+        
         return 0;
     }
 

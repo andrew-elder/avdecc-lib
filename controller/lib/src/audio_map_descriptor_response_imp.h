@@ -47,6 +47,6 @@ namespace avdecc_lib
         
         uint16_t mappings_offset();
         uint16_t STDCALL number_of_mappings();
-        int STDCALL mapping(size_t index, struct audio_map_mapping &map);
+        int const STDCALL mapping(size_t index, struct audio_map_mapping &map);
     };
 }

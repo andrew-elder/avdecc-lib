@@ -60,6 +60,6 @@ namespace avdecc_lib
          * \param mapping The mapping structure that is filled in by this funtion.
          * \return Returns 0 on success.
          */
-        AVDECC_CONTROLLER_LIB32_API virtual int STDCALL mapping(size_t index, struct audio_map_mapping &mapping) = 0;
+        AVDECC_CONTROLLER_LIB32_API virtual int const STDCALL mapping(size_t index, struct audio_map_mapping &mapping) = 0;
     };
 }

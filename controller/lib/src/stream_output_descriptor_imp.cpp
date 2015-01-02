@@ -43,9 +43,6 @@ namespace avdecc_lib
 {
     stream_output_descriptor_imp::stream_output_descriptor_imp(end_station_imp *end_station_obj, const uint8_t *frame, ssize_t pos, size_t frame_len) : descriptor_base_imp(end_station_obj, frame, frame_len, pos)
     {
-        m_type = jdksavdecc_descriptor_stream_get_descriptor_type(resp_ref->get_buffer(), resp_ref->get_pos());
-        m_index = jdksavdecc_descriptor_stream_get_descriptor_index(resp_ref->get_buffer(), resp_ref->get_pos());
-        
         memset(&aem_cmd_set_stream_format_resp, 0, sizeof(struct jdksavdecc_aem_command_set_stream_format_response));
         memset(&aem_cmd_set_stream_info_resp, 0, sizeof(struct jdksavdecc_aem_command_set_stream_info_response));
     }
@@ -89,13 +86,13 @@ namespace avdecc_lib
 
     uint16_t STDCALL stream_output_descriptor_imp::descriptor_type() const
     {
-        assert(m_type == JDKSAVDECC_DESCRIPTOR_STREAM_OUTPUT);
-        return m_type;
+        assert(jdksavdecc_descriptor_stream_get_descriptor_type(resp_ref->get_buffer(), resp_ref->get_pos()) == JDKSAVDECC_DESCRIPTOR_STREAM_OUTPUT);
+        return jdksavdecc_descriptor_stream_get_descriptor_type(resp_ref->get_buffer(), resp_ref->get_pos());
     }
 
     uint16_t STDCALL stream_output_descriptor_imp::descriptor_index() const
     {
-        return m_index;
+        return jdksavdecc_descriptor_stream_get_descriptor_index(resp_ref->get_buffer(), resp_ref->get_pos());
     }
 
     uint64_t STDCALL stream_output_descriptor_imp::set_stream_format_stream_format()
