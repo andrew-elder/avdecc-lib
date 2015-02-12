@@ -42,10 +42,11 @@ namespace avdecc_lib
 	class background_read_request
 	{
 	public:
-		background_read_request(uint16_t t, uint16_t I) :
-            m_type(t), m_index(I) {};
-		uint16_t m_type;
-		uint16_t m_index;
+        background_read_request(uint16_t t, uint16_t I) :
+                m_type(t), m_index(I) {m_resubmit_count = 0;};
+        uint16_t m_type;
+        uint16_t m_index;
+        uint16_t m_resubmit_count;
         timer m_timer;
 	};
 

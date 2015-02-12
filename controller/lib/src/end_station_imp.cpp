@@ -71,7 +71,8 @@ namespace avdecc_lib
         selected_entity_index = 0;
         selected_config_index = 0;
 
-        read_desc_init(JDKSAVDECC_DESCRIPTOR_ENTITY, 0);
+        queue_background_read_request(JDKSAVDECC_DESCRIPTOR_ENTITY, 0, 1);
+        background_read_submit_pending();
 
         return 0;
     }
@@ -407,9 +408,21 @@ namespace avdecc_lib
             // check inflight timeout
             if (b->m_timer.timeout())
             {
-                log_imp_ref->post_log_msg(LOGGING_LEVEL_ERROR, "Background read timeout reading descriptor %s index %d\n", utility::aem_desc_value_to_name(b->m_type), b->m_index);
                 ii = m_backbround_read_inflight.erase(ii);
-                delete b;
+                /* If read times out, resubmit it. Using 1 second timeouts set in background_read_submit_pending(), so no great load here. */
+                b->m_resubmit_count++;
+                if (b->m_resubmit_count < 10)
+                {
+	                log_imp_ref->post_log_msg(LOGGING_LEVEL_ERROR, "Background read timeout (resubmit %d) reading descriptor %s index %d from 0x%llx\n",
+		                b->m_resubmit_count, utility::aem_desc_value_to_name(b->m_type), b->m_index, this->end_station_entity_id);
+	                m_backbround_read_pending.push_back(b);
+                }
+                else
+                {
+	                log_imp_ref->post_log_msg(LOGGING_LEVEL_ERROR, "Background read timeout (terminate) reading descriptor %s index %d from 0x%llx\n",
+		                utility::aem_desc_value_to_name(b->m_type), b->m_index, this->end_station_entity_id);
+	                delete b;
+                }
             }
             else
             {
@@ -454,7 +467,7 @@ namespace avdecc_lib
             m_backbround_read_pending.pop_front();
             log_imp_ref->post_log_msg(LOGGING_LEVEL_DEBUG, "Background read of %s index %d", utility::aem_desc_value_to_name(b_first->m_type), b_first->m_index);
             read_desc_init(b_first->m_type, b_first->m_index);
-            b_first->m_timer.start(750);       // 750 ms timeout (1722.1 timeout is 250ms)
+            b_first->m_timer.start(1000);       // 1000 ms timeout (1722.1 timeout is 250ms)
             m_backbround_read_inflight.push_back(b_first);
 
             if (!m_backbround_read_pending.empty())
@@ -465,7 +478,7 @@ namespace avdecc_lib
                     m_backbround_read_pending.pop_front();
                     log_imp_ref->post_log_msg(LOGGING_LEVEL_DEBUG, "Background read of %s index %d", utility::aem_desc_value_to_name(b_next->m_type), b_next->m_index);
                     read_desc_init(b_next->m_type, b_next->m_index);
-                    b_next->m_timer.start(750);       // 750 ms timeout (1722.1 timeout is 250ms)
+                    b_next->m_timer.start(1000);       // 1000 ms timeout (1722.1 timeout is 250ms)
                     m_backbround_read_inflight.push_back(b_next);
                     if (m_backbround_read_pending.empty())
                     {
