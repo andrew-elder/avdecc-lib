@@ -53,7 +53,7 @@ namespace avdecc_lib
 
         ~system_message_queue();
 
-        void queue_push(void *thread_data);
+        bool queue_push(void *thread_data);
 
         void queue_pop_nowait(void *thread_data);
 

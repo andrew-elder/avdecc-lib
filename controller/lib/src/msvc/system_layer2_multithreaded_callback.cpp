@@ -95,6 +95,7 @@ namespace avdecc_lib
     int system_layer2_multithreaded_callback::queue_tx_frame(void *notification_id, uint32_t notification_flag, uint8_t *frame, size_t frame_len)
     {
         struct poll_thread_data thread_data;
+        bool tx_queue_full;
 
         assert(frame_len < 2048);
         thread_data.frame = new uint8_t[2048];
@@ -106,7 +107,11 @@ namespace avdecc_lib
         memcpy(thread_data.frame, frame, frame_len);
         thread_data.notification_id = notification_id;
         thread_data.notification_flag = notification_flag;
-        poll_tx.tx_queue->queue_push(&thread_data);
+        tx_queue_full = poll_tx.tx_queue->queue_push(&thread_data);
+        if (!tx_queue_full)
+        {
+            log_imp_ref->post_log_msg(LOGGING_LEVEL_ERROR, "SYSTEM: Packet tx_queue full");
+        }
 
         /**
          * Check for conditions that cause wait for completion.
@@ -149,6 +154,7 @@ namespace avdecc_lib
         struct poll_thread_data thread_data;
         const uint8_t *frame;
         uint16_t length;
+        bool rx_queue_full;
 
         while (WaitForSingleObject(poll_rx.queue_thread.kill_sem, 0))
         {
@@ -168,7 +174,11 @@ namespace avdecc_lib
                     exit(EXIT_FAILURE);
                 }
                 memcpy(thread_data.frame, frame, thread_data.frame_len);
-                poll_rx.rx_queue->queue_push(&thread_data);
+                rx_queue_full = poll_rx.rx_queue->queue_push(&thread_data);
+                if (!rx_queue_full)
+                {
+                    log_imp_ref->post_log_msg(LOGGING_LEVEL_ERROR, "SYSTEM: Packet rx_queue full");
+                }
             }
             else
             {

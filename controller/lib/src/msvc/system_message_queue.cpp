@@ -55,14 +55,18 @@ namespace avdecc_lib
         DeleteCriticalSection(&critical_section_obj);
     }
 
-    void system_message_queue::queue_push(void *thread_data)
+    bool system_message_queue::queue_push(void *thread_data)
     {
-        WaitForSingleObject(space_avail, INFINITE);
+        DWORD status;
+        status = WaitForSingleObject(space_avail, 0);
+        if (status == WAIT_TIMEOUT)
+            WaitForSingleObject(space_avail, INFINITE);
         EnterCriticalSection(&critical_section_obj);
         memcpy(&buf[in_pos * entry_size], thread_data, entry_size);
         in_pos = (in_pos + 1) % entry_count;
         LeaveCriticalSection(&critical_section_obj);
         ReleaseSemaphore(data_avail, 1, NULL);
+        return status != WAIT_TIMEOUT;
     }
 
     void system_message_queue::queue_pop_nowait(void *thread_data)
