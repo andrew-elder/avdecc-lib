@@ -40,6 +40,7 @@
 #include "system_tx_queue.h"
 #include "jdksavdecc.h"
 #include "end_station_imp.h"
+#include "discovery_pacer.h"
 
 namespace avdecc_lib
 {
@@ -463,17 +464,11 @@ namespace avdecc_lib
         // empty submit the next set of read operations
         if (m_backbround_read_inflight.empty() && !m_backbround_read_pending.empty())
         {
-            background_read_request *b_first = m_backbround_read_pending.front();
-            m_backbround_read_pending.pop_front();
-            log_imp_ref->post_log_msg(LOGGING_LEVEL_DEBUG, "Background read of %s index %d", utility::aem_desc_value_to_name(b_first->m_type), b_first->m_index);
-            read_desc_init(b_first->m_type, b_first->m_index);
-            b_first->m_timer.start(1000);       // 1000 ms timeout (1722.1 timeout is 250ms)
-            m_backbround_read_inflight.push_back(b_first);
-
-            if (!m_backbround_read_pending.empty())
+            uint16_t first_type = m_backbround_read_pending.front()->m_type;
+            if (!m_backbround_read_pending.empty() && discovery_pacer::getInstance().ok_to_send_packet())
             {
                 background_read_request *b_next = m_backbround_read_pending.front();
-                while (b_next->m_type == b_first->m_type)
+                while (b_next->m_type == first_type)
                 {
                     m_backbround_read_pending.pop_front();
                     log_imp_ref->post_log_msg(LOGGING_LEVEL_DEBUG, "Background read of %s index %d", utility::aem_desc_value_to_name(b_next->m_type), b_next->m_index);

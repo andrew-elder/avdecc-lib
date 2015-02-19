@@ -62,6 +62,11 @@ namespace avdecc_lib
         AVDECC_CONTROLLER_LIB32_API virtual int STDCALL get_last_resp_status() = 0;
 
         /**
+         * Limit background endstation enumeration packet rate.
+         */
+        AVDECC_CONTROLLER_LIB32_API virtual void STDCALL discovery_pacing(int packets_per_second) = 0;
+
+        /**
          * Start point of the system process, which calls the thread initialization function.
          */
         AVDECC_CONTROLLER_LIB32_API virtual int STDCALL process_start() = 0;

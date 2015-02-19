@@ -37,6 +37,7 @@
 #include "system_message_queue.h"
 #include "system_tx_queue.h"
 #include "system_layer2_multithreaded_callback.h"
+#include "discovery_pacer.h"
 
 namespace avdecc_lib
 {
@@ -141,6 +142,11 @@ namespace avdecc_lib
     int STDCALL system_layer2_multithreaded_callback::get_last_resp_status()
     {
         return resp_status_for_cmd;
+    }
+
+    void STDCALL system_layer2_multithreaded_callback::discovery_pacing(int packets_per_second)
+    {
+        discovery_pacer::getInstance().set_packets_per_second(packets_per_second, NETIF_READ_TIMEOUT_MS);
     }
 
     DWORD WINAPI system_layer2_multithreaded_callback::proc_wpcap_thread(LPVOID lpParam)
@@ -345,6 +351,8 @@ namespace avdecc_lib
         if (tick_timer.timeout()) // Check tick timeout
         {
             bool notification_id_incomplete = false;
+
+            discovery_pacer::getInstance().tick();
 
             if (wait_mgr->active_state())
             {
