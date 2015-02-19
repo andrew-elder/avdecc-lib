@@ -48,9 +48,9 @@ namespace avdecc_lib
 
         ~timer();
 
-        avdecc_lib_os::aTimestamp clk_monotonic(void);
+        static avdecc_lib_os::aTimestamp clk_monotonic(void);
 
-        uint32_t clk_convert_to_ms(avdecc_lib_os::aTimestamp timestamp);
+        static uint32_t clk_convert_to_ms(avdecc_lib_os::aTimestamp timestamp);
 
         void start(int duration_ms);
 
