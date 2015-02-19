@@ -69,30 +69,27 @@ namespace avdecc_lib
             uint8_t * old_buf;
             int new_out_pos = 0;
             int old_out_pos = 0;
-            int copy_count;
 
             new_buf = (uint8_t *)calloc(new_count, entry_size);
             if (new_buf)
             {
-                // Because buf is essentially a circular buffer, have
+                // Because buf is used as circular buffer, have
                 // to copy values carefully to the new buffer.
                 // We know that the old buffer is full, so have
                 // two copy operations to perform.
                 EnterCriticalSection(&critical_section_obj);
                 old_out_pos = out_pos;
-                copy_count = entry_count - old_out_pos;
                 // copy old buffer from out_pos to the end of the old buffer
                 memcpy(&new_buf[0 * entry_size],
                         &buf[old_out_pos * entry_size],
-                        entry_size * copy_count);
-                new_out_pos = copy_count;
-                old_out_pos = (old_out_pos + copy_count) % entry_count;
-                copy_count = out_pos;
-                // copy from start of old buffer to position out_pos
+                        entry_size * (entry_count - old_out_pos));
+                new_out_pos = (entry_count - old_out_pos);
+                old_out_pos = (old_out_pos + (entry_count - old_out_pos)) % entry_count;
+                 // copy from start of old buffer to position out_pos
                 memcpy(&new_buf[new_out_pos * entry_size],
                     &buf[0 * entry_size],
-                    entry_size * copy_count);
-                new_out_pos = new_out_pos + copy_count;
+                    entry_size * out_pos);
+                new_out_pos = new_out_pos + out_pos;
                 out_pos = 0;
                 in_pos = new_out_pos;
                 old_buf = buf;
