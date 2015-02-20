@@ -67,6 +67,9 @@ namespace avdecc_lib
             }
             m_packets_per_second = pps;
             m_packets_per_tick = pps * 1000 / tick_rate_ms;
+            // never go as low as zero packets per tick
+            if (0 == m_packets_per_tick)
+                m_packets_per_tick = 1;
         };
 
         void tick(void)
