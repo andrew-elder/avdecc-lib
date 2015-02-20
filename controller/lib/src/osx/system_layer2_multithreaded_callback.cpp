@@ -60,7 +60,7 @@
 #include "system_message_queue.h"
 #include "system_tx_queue.h"
 #include "system_layer2_multithreaded_callback.h"
-
+#include "discovery_pacer.h"
 
 namespace avdecc_lib
 {
@@ -186,6 +186,11 @@ namespace avdecc_lib
     int STDCALL system_layer2_multithreaded_callback::get_last_resp_status()
     {
         return resp_status_for_cmd;
+    }
+
+    void STDCALL system_layer2_multithreaded_callback::discovery_pacing(int packets_per_second)
+    {
+        discovery_pacer::getInstance().set_packets_per_second(packets_per_second, TIME_PERIOD_25_MILLISECONDS);
     }
 
     int system_layer2_multithreaded_callback::fn_timer_cb(struct kevent *priv)

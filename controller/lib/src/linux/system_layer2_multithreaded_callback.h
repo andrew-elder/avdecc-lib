@@ -74,6 +74,11 @@ namespace avdecc_lib
         int STDCALL get_last_resp_status();
 
         /**
+         * Limit background endstation enumeration packet rate.
+         */
+        void STDCALL discovery_pacing(int packets_per_second);
+
+        /**
          * Start point of the system process, which calls the thread initialization function.
          */
         int STDCALL process_start();

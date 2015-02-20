@@ -63,6 +63,7 @@ namespace avdecc_lib
 
         /**
          * Limit background endstation enumeration packet rate.
+         * \param packets_per_second The number of packets per second. Minimum value is 10.
          */
         AVDECC_CONTROLLER_LIB32_API virtual void STDCALL discovery_pacing(int packets_per_second) = 0;
 
