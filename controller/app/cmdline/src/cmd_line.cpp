@@ -90,7 +90,7 @@ cmd_line::cmd_line()
 
 cmd_line::cmd_line(void (*notification_callback) (void *, int32_t, uint64_t, uint16_t, uint16_t, uint16_t, uint32_t, void *),
                    void (*log_callback) (void *, int32_t, const char *, int32_t),
-                   bool test_mode, char *interface, int32_t log_level)
+                   bool test_mode, char *interface, int32_t log_level, int32_t pacing)
     : test_mode(test_mode)
     , output_redirected(false)
 {
@@ -108,6 +108,7 @@ cmd_line::cmd_line(void (*notification_callback) (void *, int32_t, uint64_t, uin
 
     atomic_cout << "AVDECC Controller version: " << controller_obj->get_version() << std::endl;
     print_interfaces_and_select(interface);
+    sys->discovery_pacing(pacing);
     sys->process_start();
 }
 

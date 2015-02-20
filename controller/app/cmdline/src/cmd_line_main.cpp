@@ -214,6 +214,7 @@ static void usage(char *argv[])
     std::cerr << "  -t           :  Sets test mode which disables checks" << std::endl;
     std::cerr << "  -i interface :  Sets the name of the interface to use" << std::endl;
     std::cerr << "  -l log_level :  Sets the log level to use." << std::endl;
+    std::cerr << "  -p pacing    :  Sets packets per second for startup endstation enumeration." << std::endl;
     std::cerr << log_level_help << std::endl;
     exit(1);
 }
@@ -225,8 +226,9 @@ int main(int argc, char *argv[])
     char *interface = NULL;
     int c = 0;
     int32_t log_level = avdecc_lib::LOGGING_LEVEL_ERROR;
+    int32_t pacing = -1;
 
-    while ((c = getopt(argc, argv, "ti:l:")) != -1) {
+    while ((c = getopt(argc, argv, "ti:l:p:")) != -1) {
         switch (c) {
             case 't':
                 test_mode = true;
@@ -236,6 +238,9 @@ int main(int argc, char *argv[])
                 break;
             case 'l':
                 log_level = atoi(optarg);
+                break;
+            case 'p':
+                pacing = atoi(optarg);
                 break;
             case ':':
                 fprintf(stderr, "Option -%c requires an operand\n", optopt);
@@ -264,7 +269,7 @@ int main(int argc, char *argv[])
     }
 
     cmd_line avdecc_cmd_line_ref(notification_callback, log_callback,
-            test_mode, interface, log_level);
+        test_mode, interface, log_level, pacing);
 
     std::vector<std::string> input_argv;
     size_t pos = 0;

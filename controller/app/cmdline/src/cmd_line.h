@@ -95,7 +95,7 @@ public:
      */
     cmd_line(void (*notification_callback) (void *, int32_t, uint64_t, uint16_t, uint16_t, uint16_t, uint32_t, void *),
              void (*log_callback) (void *, int32_t, const char *, int32_t),
-             bool test_mode, char *interface, int32_t log_level);
+             bool test_mode, char *interface, int32_t log_level, int32_t pacing);
 
     ~cmd_line();
 
