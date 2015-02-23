@@ -170,7 +170,7 @@ namespace avdecc_lib
             {
                 if (length > 2048)
                 {
-                    log_imp_ref->post_log_msg(LOGGING_LEVEL_ERROR, "wpcap returned packet larger than 1600 bytes");
+                    log_imp_ref->post_log_msg(LOGGING_LEVEL_ERROR, "wpcap returned packet larger than 2048 bytes");
                     continue;
                 }
                 thread_data.frame_len = length;
